@@ -24,7 +24,7 @@ namespace BasicASP.NETMvc.Controllers
             }
 
             CreateAuthCookie(user.UserName);
-            AddValusToSession(user.UserName);
+            AddValueToSession(user.UserName);
             return RedirectToAction("Page");
         }
 
@@ -34,18 +34,20 @@ namespace BasicASP.NETMvc.Controllers
         public ActionResult Page()
         {
             // # homework 1 -- redirect to movies/index
-            return View();
+            return RedirectToAction("Index", "Movies");
         }
 
         private void CreateAuthCookie(string userName)
         {
             //basic points 16 please add param into Cookie 
             // use cookie auth
+            FormsAuthentication.SetAuthCookie(userName,true);
         }
 
-        private void AddValusToSession(string userName)
+        private void AddValueToSession(string userName)
         {
-            //basic points 17 Add param into Session and Seeeion key is "userName"
+            //basic points 17 Add param into Session and Session key is "userName"
+            Session.Add("userName", userName);
         }
     }
 }
